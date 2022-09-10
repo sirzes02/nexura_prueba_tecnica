@@ -22,8 +22,14 @@ export const requestSquematic = async (
         ...generalParams,
         params: object,
       });
-    } else {
+    } else if (type === "POST") {
       res = await axios.post(
+        process.env.NEXT_PUBLIC_DOMAIN + url,
+        object,
+        generalParams
+      );
+    } else if (type === "PUT") {
+      res = await axios.put(
         process.env.NEXT_PUBLIC_DOMAIN + url,
         object,
         generalParams

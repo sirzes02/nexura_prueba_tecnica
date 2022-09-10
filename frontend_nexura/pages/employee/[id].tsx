@@ -77,9 +77,33 @@ const Post = () => {
       }
     });
 
-    if (!isCreating) {
+    if (!isCreating && id) {
+      setIsLoading(true);
+
+      requestSquematic("GET", "/api/employee/get_one", { id: id }).then(
+        (data) => {
+          if (data) {
+            const handleRoles = data.result.roles.map(({ id }: any) => ({
+              id,
+              active: true,
+            }));
+
+            handleChange({
+              name: data.result.nombre,
+              email: data.result.email,
+              sex: data.result.sexo,
+              area: data.result.area.id,
+              description: data.result.descripcion,
+              newspaper: data.result.boletin === 1,
+            });
+            setSelectedRoles(handleRoles);
+
+            setIsLoading(false);
+          }
+        }
+      );
     }
-  }, [handleChange, isCreating]);
+  }, [handleChange, id, isCreating]);
 
   const handleCreate = async () => {
     setIsLoading(true);
@@ -101,6 +125,37 @@ const Post = () => {
     if (res) {
       await MySwal.fire({
         title: "Empleado creado con exito",
+        icon: "success",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      router.back();
+    }
+
+    setIsLoading(false);
+  };
+
+  const handleUpdate = async () => {
+    setIsLoading(true);
+
+    const handleRoles = selectedRoles
+      .filter(({ active }) => active)
+      .map(({ id }) => id);
+
+    const res = await requestSquematic("PUT", "/api/employee/update", {
+      id,
+      nombre: data.name,
+      email: data.email,
+      sexo: data.sex,
+      area_id: data.area,
+      boletin: data.newspaper ? 1 : 0,
+      descripcion: data.description,
+      roles: handleRoles,
+    });
+
+    if (res) {
+      await MySwal.fire({
+        title: "Empleado actalizado con exito",
         icon: "success",
         showConfirmButton: false,
         timer: 1500,
@@ -213,7 +268,7 @@ const Post = () => {
         <div className="d-flex mb-2">
           <div className="">Roles *</div>
           <div className="ms-3">
-            {areas.length !== 0 ? (
+            {roles.length !== 0 ? (
               roles.map((item, i) => (
                 <div className="form-check" key={i}>
                   <input
@@ -234,6 +289,10 @@ const Post = () => {
                       setSelectedRoles(temp);
                     }}
                     disabled={isLoading}
+                    checked={
+                      selectedRoles.find((selected) => item.id === selected.id)
+                        ?.active ?? false
+                    }
                   />
                   <label className="form-check-label">{item.nombre}</label>
                 </div>
@@ -250,13 +309,23 @@ const Post = () => {
             )}
           </div>
         </div>
-        <button
-          className="btn btn-primary mt-1"
-          disabled={Object.values(isValid).includes(false) || isLoading}
-          onClick={handleCreate}
-        >
-          Guardar
-        </button>
+        {isCreating ? (
+          <button
+            className="btn btn-success mt-1"
+            disabled={Object.values(isValid).includes(false) || isLoading}
+            onClick={handleCreate}
+          >
+            Guardar
+          </button>
+        ) : (
+          <button
+            className="btn btn-primary mt-1"
+            disabled={Object.values(isValid).includes(false) || isLoading}
+            onClick={handleUpdate}
+          >
+            Actualizar
+          </button>
+        )}
       </div>
     </Layout>
   );

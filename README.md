@@ -40,7 +40,7 @@ php artisan serve
 
 ### Frontend
 
-Se debe crear el archivo .env de configuración, posteriormente configurando la propiedad NEXT_PUBLIC_DOMAIN con la URL del dominio donde se está alojando el backend (Considerando la ejecución del mismo, suele ser [localhost:8000](localhost:8000)).
+Se debe crear el archivo .env de configuración, posteriormente configurando la propiedad NEXT_PUBLIC_DOMAIN con la URL del dominio donde se está alojando el backend (Considerando la ejecución del mismo, suele ser [http://127.0.0.1:8000](http://127.0.0.1:8000)).
 
 ```bash
 cp .env.local.example .env.local

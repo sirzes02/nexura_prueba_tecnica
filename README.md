@@ -2,7 +2,7 @@
 
 Este desarrollo fue llevado a cabo de manera no monolítica, realizando, un backend haciendo uso de [Laravel](https://laravel.com/) como Framework de PHP, un frontend haciendo uso del Framework [Next.js](https://nextjs.org/) de la biblioteca [React](https://es.reactjs.org/) y gestión la persistencia haciendo uso de [MySQL](https://www.mysql.com/).
 
-## Installation
+## Instalación y ejecución
 
 Debe seguir los procesos de instalación de las respectivas tecnología
 
@@ -69,3 +69,12 @@ yarn dev
 ```bash
 npm run dev
 ```
+
+## Información general
+
+Los principales lenguajes de programación y herramientas usadas durante este desarrollo fueron:
+
+- PHP - v. 8.1.6
+- TS - v. 4.8
+- Laravel - v. 9.x
+- Next.js - v. 12.2

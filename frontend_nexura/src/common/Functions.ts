@@ -45,7 +45,8 @@ export const requestSquematic = async (
         MySwal.fire({
           icon: "error",
           title: "¡Error!",
-          text: "Typing problem...",
+          text: "Error de datos...",
+          footer: errorHandler(data.error),
         });
     }
   } catch (error: any) {
@@ -71,4 +72,18 @@ export const requestSquematic = async (
         footer: error,
       });
   }
+};
+
+export const errorHandler = (errors: string | any): string => {
+  if (typeof errors === "string") {
+    return errors;
+  }
+
+  const errs: string[] = [];
+
+  Object.keys(errors).forEach((key) =>
+    errs.push(...errors[key as keyof object])
+  );
+
+  return errs.join("\n\n");
 };

@@ -151,7 +151,7 @@ const Home: NextPage = () => {
                   setIsLoading(false);
 
                   await MySwal.fire({
-                    title: "Empleado actalizado con exito",
+                    title: "Empleado eliminado con exito",
                     icon: "success",
                     showConfirmButton: false,
                     timer: 1500,

@@ -178,23 +178,39 @@ const Post = () => {
           <label className="form-label">Nombre completo *</label>
           <input
             type="text"
-            className="form-control"
+            className={
+              "form-control " +
+              (data.name.length !== 0 &&
+                (isValid.name ? "is-valid" : "is-invalid"))
+            }
             placeholder="Ingrese su nombre..."
             value={data.name}
             onChange={({ target }) => handleChange({ name: target.value })}
             disabled={isLoading}
           />
+          <div className="valid-feedback">¡Luce bien!</div>
+          <div className="invalid-feedback">
+            ¡Por favor escribe un nombre correcto!
+          </div>
         </div>
         <div className="mb-3">
           <label className="form-label">Correo electrónico *</label>
           <input
             type="email"
-            className="form-control"
+            className={
+              "form-control " +
+              (data.email.length !== 0 &&
+                (isValid.email ? "is-valid" : "is-invalid"))
+            }
             placeholder="nombre@ejemplo.com"
             value={data.email}
             onChange={({ target }) => handleChange({ email: target.value })}
             disabled={isLoading}
           />
+          <div className="valid-feedback">¡Luce bien!</div>
+          <div className="invalid-feedback">
+            ¡Por favor escribe un correo correcto!
+          </div>
         </div>
         <div className="d-flex mb-2">
           <div className="">Sexo *</div>
@@ -243,7 +259,11 @@ const Post = () => {
         <div className="mb-3">
           <label className="form-label">Descripción *</label>
           <textarea
-            className="form-control"
+            className={
+              "form-control " +
+              (data.description.length !== 0 &&
+                (isValid.description ? "is-valid" : "is-invalid"))
+            }
             rows={3}
             placeholder="Ingrese descripción"
             value={data.description}
@@ -251,7 +271,12 @@ const Post = () => {
               handleChange({ description: target.value })
             }
             disabled={isLoading}
+            maxLength={255}
           ></textarea>
+          <div className="valid-feedback">¡Luce bien!</div>
+          <div className="invalid-feedback">
+            ¡Por favor escribe una descripción correcta!
+          </div>
         </div>
         <div className="form-check mb-2">
           <input

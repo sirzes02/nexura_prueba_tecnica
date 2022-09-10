@@ -148,13 +148,15 @@ const Home: NextPage = () => {
                 );
 
                 if (res) {
+                  setIsLoading(false);
+
                   await MySwal.fire({
                     title: "Empleado actalizado con exito",
                     icon: "success",
                     showConfirmButton: false,
                     timer: 1500,
                   });
-                  fetchData();
+                  await fetchData();
                 }
 
                 setIsLoading(false);

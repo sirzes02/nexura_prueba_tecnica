@@ -21,7 +21,7 @@ Route::prefix("employee")->group(function () {
     Route::get('/get_one', [EmployeeController::class, "get_one"])->name('get_one');
     Route::post('/create', [EmployeeController::class, "create"])->name('create');
     Route::put('/update', [EmployeeController::class, "update"])->name('update');
-    Route::delete('/delete', [EmployeeController::class, "delete"])->name('delete');
+    Route::post('/delete', [EmployeeController::class, "delete"])->name('delete');
 });
 
 Route::prefix("area")->group(function () {

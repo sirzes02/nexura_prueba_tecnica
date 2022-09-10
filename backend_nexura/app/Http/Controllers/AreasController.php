@@ -3,21 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Models\Areas;
+use Illuminate\Http\JsonResponse;
 use stdClass;
 use Throwable;
 
 class AreasController extends Controller
 {
-    function get_areas()
+    /**
+     * @return JsonResponse
+     */
+    function get_areas(): JsonResponse
     {
         $status = "OK";
         $result = "";
-        $error = new stdClass;
+        $error = new stdClass();
 
         try {
-            $areas = Areas::all();
+            $result = Areas::all();
 
-            $result = $areas;
         } catch (Throwable $th) {
             $status = "Error";
             $error->error =  [$th->getMessage()];

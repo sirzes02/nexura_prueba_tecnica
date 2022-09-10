@@ -3,21 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Models\Roles;
+use Illuminate\Http\JsonResponse;
 use stdClass;
 use Throwable;
 
 class RolesController extends Controller
 {
-    function get_roles()
+    /**
+     * @return JsonResponse
+     */
+    function get_roles(): JsonResponse
     {
         $status = "OK";
         $result = "";
         $error = new stdClass;
 
         try {
-            $areas = Roles::all();
 
-            $result = $areas;
+            $result = Roles::all();
+
         } catch (Throwable $th) {
             $status = "Error";
             $error->error =  [$th->getMessage()];

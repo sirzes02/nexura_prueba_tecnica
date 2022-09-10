@@ -342,23 +342,25 @@ const Post = () => {
             )}
           </div>
         </div>
-        {isCreating ? (
-          <button
-            className="btn btn-success mt-1"
-            disabled={Object.values(isValid).includes(false) || isLoading}
-            onClick={handleCreate}
-          >
-            Guardar
-          </button>
-        ) : (
-          <button
-            className="btn btn-primary mt-1"
-            disabled={Object.values(isValid).includes(false) || isLoading}
-            onClick={handleUpdate}
-          >
-            Actualizar
-          </button>
-        )}
+        <div className="mt-1 mb-3">
+          {isCreating ? (
+            <button
+              className="btn btn-success"
+              disabled={Object.values(isValid).includes(false) || isLoading}
+              onClick={handleCreate}
+            >
+              Guardar
+            </button>
+          ) : (
+            <button
+              className="btn btn-primary"
+              disabled={Object.values(isValid).includes(false) || isLoading}
+              onClick={handleUpdate}
+            >
+              Actualizar
+            </button>
+          )}
+        </div>
       </div>
     </Layout>
   );

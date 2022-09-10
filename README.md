@@ -2,6 +2,11 @@
 
 Este desarrollo fue llevado a cabo de manera no monolítica, realizando, un backend haciendo uso de [Laravel](https://laravel.com/) como Framework de PHP, un frontend haciendo uso del Framework [Next.js](https://nextjs.org/) de la biblioteca [React](https://es.reactjs.org/) y gestión la persistencia haciendo uso de [MySQL](https://www.mysql.com/).
 
+### Enlaces
+
+- Documentación de API: [https://documenter.getpostman.com/](https://documenter.getpostman.com/view/10298521/VVk8By33)
+- Video demostrativo de funcionamiento: [https://youtu.be/](https://youtu.be/oBKCX6aHYto)
+
 ## Instalación y ejecución
 
 Debe seguir los procesos de instalación de las respectivas tecnología

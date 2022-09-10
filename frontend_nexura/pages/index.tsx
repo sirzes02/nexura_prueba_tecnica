@@ -1,9 +1,9 @@
-import axios from "axios";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useFilters, usePagination, useSortBy, useTable } from "react-table";
+import { MySwal } from "../src/common/Alert";
 import { requestSquematic } from "../src/common/Functions";
 import { getValue, saveValue } from "../src/common/Storage";
 import Layout from "../src/components/Layout";
@@ -119,14 +119,59 @@ const Home: NextPage = () => {
           id: "actions",
           Header: "",
           Cell: ({ row }) => {
+            const handleDelete = async () => {
+              const confirm = await MySwal.fire({
+                title:
+                  "¿Estás seguro de elimar el empleado: " +
+                  row.values.nombre +
+                  "?",
+                text: "Esta acción no prodrá ser revertida",
+                icon: "warning",
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Eliminar",
+                cancelButtonText: "Cancelar",
+                showCancelButton: true,
+                denyButtonText: "Cancelar",
+              });
+
+              if (confirm.isConfirmed) {
+                setIsLoading(true);
+
+                const res = await requestSquematic(
+                  "POST",
+                  "/api/employee/delete",
+                  {
+                    id: row.values.id,
+                  }
+                );
+
+                if (res) {
+                  await MySwal.fire({
+                    title: "Empleado actalizado con exito",
+                    icon: "success",
+                    showConfirmButton: false,
+                    timer: 1500,
+                  });
+                  fetchData();
+                }
+
+                setIsLoading(false);
+              }
+            };
+
             return (
               <>
                 <Link href={"/employee/" + row.values.id}>
-                  <button className="btn btn-sm">
+                  <button className="btn btn-sm" disabled={isLoading}>
                     <i className="fa-solid fa-pen-to-square"></i>
                   </button>
                 </Link>
-                <button className="btn btn-sm" onClick={() => {}}>
+                <button
+                  className="btn btn-sm"
+                  onClick={handleDelete}
+                  disabled={isLoading}
+                >
                   <i className="fa-solid fa-trash"></i>
                 </button>
               </>
